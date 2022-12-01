@@ -1,4 +1,6 @@
 
+java分页工具，8KB大小，无三方依赖。
+
 ## 代码使用
 
 #### 1. pom.xml 引入 
@@ -11,51 +13,64 @@
 </dependency>
 ````
 
-#### 1. 快速使用
+#### 2. 快速使用
 
 ````
-Page page = new Page(80, 10, 8); 	//共80条、每页10条 ，当前第3页 的分页数据
-page.setPathAndQuery("/admin/user/list.jsp", "title=管雷鸣&age=22&currentPage=4");	//这个完全可以不用设置，如果不设置，那么输出的不会带有跳转地址
+Page page = new Page(80, 10, 3); 	//共80条、每页10条 ，当前第3页 的分页数据
+page.setUrl("http://www.zvo.cn/admin/user/list.jsp?name=管雷鸣&age=23&currentPage=4");  //当前的url，这项可以不设置，不设置那输出时有链接的将不会有值。
 System.out.println(page.toJsonString());
 ````
 
-输出：
+#### 3. 输出
 
 ````
 {
-	"lastPage": "/admin/user/list.jsp?title=管雷鸣&age=22&currentPage=8",
-	"firstPage": "/admin/user/list.jsp?title=管雷鸣&age=22&currentPage=1",
-	"nextPageNumber": 8,
-	"nextPage": "/admin/user/list.jsp?title=管雷鸣&age=22&currentPage=8",
-	"haveNextPage": false,
-	"upPageNumber": 7,
-	"haveUpPage": false,
-	"upPage": "/admin/user/list.jsp?title=管雷鸣&age=22&currentPage=7",
-	"url": "/admin/user/list.jsp?title=管雷鸣&age=22",
-	"limitStart": 70,
+	"lastPage": "/admin/user/list.jsp?name=管雷鸣&age=23&currentPage=4&currentPage=8",
+	"firstPage": "/admin/user/list.jsp?name=管雷鸣&age=23&currentPage=4&currentPage=1",
+	"nextPageNumber": 4,
+	"nextPage": "/admin/user/list.jsp?name=管雷鸣&age=23&currentPage=4&currentPage=4",
+	"haveNextPage": true,
+	"upPageNumber": 2,
+	"haveUpPage": true,
+	"upPage": "/admin/user/list.jsp?name=管雷鸣&age=23&currentPage=4&currentPage=2",
+	"url": "/admin/user/list.jsp?name=管雷鸣&age=23&currentPage=4",
+	"limitStart": 20,
 	"allRecordNumber": 80,
-	"currentPageNumber": 8,
+	"currentPageNumber": 3,
 	"everyNumber": 10,
 	"lastPageNumber": 8,
-	"currentLastPage": true,
+	"currentLastPage": false,
 	"currentFirstPage": false,
 	"nextList": [
-		[]
-	],
-	"upList": [
 		[{
-			"href": "/admin/user/list.jsp?title=管雷鸣&age=22&currentPage=5",
+			"href": "/admin/user/list.jsp?name=管雷鸣&age=23&currentPage=4&currentPage=4",
+			"pageNumber": 4,
+			"title": "4"
+		}, {
+			"href": "/admin/user/list.jsp?name=管雷鸣&age=23&currentPage=4&currentPage=5",
 			"pageNumber": 5,
 			"title": "5"
 		}, {
-			"href": "/admin/user/list.jsp?title=管雷鸣&age=22&currentPage=6",
+			"href": "/admin/user/list.jsp?name=管雷鸣&age=23&currentPage=4&currentPage=6",
 			"pageNumber": 6,
 			"title": "6"
+		}]
+	],
+	"upList": [
+		[{
+			"href": "/admin/user/list.jsp?name=管雷鸣&age=23&currentPage=4&currentPage=1",
+			"pageNumber": 1,
+			"title": "1"
 		}, {
-			"href": "/admin/user/list.jsp?title=管雷鸣&age=22&currentPage=7",
-			"pageNumber": 7,
-			"title": "7"
+			"href": "/admin/user/list.jsp?name=管雷鸣&age=23&currentPage=4&currentPage=2",
+			"pageNumber": 2,
+			"title": "2"
 		}]
 	]
 }
 ````
+
+## 关于我们
+作者：管雷鸣  
+个人官网：[www.guanleiming.com](http://www.guanleiming.com)  
+QQ群：726906889  

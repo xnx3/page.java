@@ -40,62 +40,6 @@ public class Page{
 	public List<TagA> nextList;	//向下的分页list标签
 	
 	/**
-	 * @param allRecordNumber 共多少条
-	 * @param everyNumber 每页多少条
-	 * @param currentPage 当前第几页，传入如 1
-	 * @param scheme 协议，传入如 http、https 
-	 * @param host 主机，域名，传入如 www.zvo.cn 、 127.0.0.1 等格式
-	 * @param port 端口号，传入如 80
-	 * @param path 请求路径，传入如 /admin/list.jsp
-	 * @param query get带的参数，传入格式如 a=1&b=2&c=3
-	 */
-	public Page(int allRecordNumber ,int everyNumber,int currentPage, String scheme, String host, int port, String path, String query){
-		upList = new ArrayList<TagA>();
-		nextList = new ArrayList<TagA>();
-		this.allRecordNumber = allRecordNumber;
-		this.everyNumber = everyNumber;
-		setUrl(scheme, host, port, path, query);
-		setCurrentPageNumber(currentPage);
-		
-		
-//		//计算一共有多少页，最后一页是第几页
-//		if(allRecordNumber == 0){
-//			this.lastPageNumber = 1;
-//		}else{
-//			this.lastPageNumber = (int) Math.ceil((float)allRecordNumber/everyNumber);
-//		}
-		
-//		this.limitStart = (this.currentPageNumber-1)*this.everyNumber;	//开始的limit
-		
-//		this.lastPage=generateUrl(lastPageNumber);	//生成尾页url
-//		this.firstPage=generateUrl(1);	//生成首页，第一页URL
-		
-//		//上一页的链接URL
-//		if(currentPage>1){
-//			this.upPageNumber = currentPage-1;
-//			this.upPage = generateUrl(this.upPageNumber);
-//		}else{
-//			this.upPageNumber = 1;
-//			this.upPage = this.firstPage;
-//		}
-		
-//		//生成下一页的URL
-//		if(currentPage<lastPageNumber){
-//			this.nextPageNumber = currentPage+1;
-//			this.nextPage=generateUrl(this.nextPageNumber);
-//		}else{
-//			this.nextPage=this.lastPage;
-//			this.nextPageNumber = this.lastPageNumber;
-//		}
-		
-//		this.haveNextPage = currentPage<lastPageNumber;	//是否还有下一页
-		this.haveUpPage = currentPage>1;		//是否还有上一页
-		
-//		this.currentFirstPage = currentPage == 1;		//当前页是否是第一页
-//		this.currentLastPage = currentPage == this.lastPageNumber;		//当前页是否是最后一页
-	}
-	
-	/**
 	 * 传入当前列表页面的完整url（会自动过滤掉当前第几页的参数，以方便生成上一页、下一页等等链接）
 	 * @param url 可以直接传入当前页面的url，图省事的话可以直接传入 request.getRequestURL() 即可。
 	 * 	<p>传入格式分两种:
