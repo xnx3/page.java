@@ -67,6 +67,23 @@ public class Page{
 			url = quxieyiUrl.substring(firstXiexian, quxieyiUrl.length());
 		}
 		
+		//如果有currentPage参数，那就将这个去掉
+		if(url.indexOf(CURRENTPAGENAME) > 0){
+			//传入的参数有当前页，需要吧currentPage这个参数给过滤掉
+			String ur = subString(url, CURRENTPAGENAME, "&", 2);
+			if(ur==null||ur.length()==0){
+				ur=subString(url, CURRENTPAGENAME, null, 2);
+			}
+			if(ur==null||ur.length()==0){
+				ur = url;
+			}else{
+				String cp = ur;
+				ur = url.replace("?"+CURRENTPAGENAME+cp, "");
+				ur = ur.replace("&"+CURRENTPAGENAME+cp, "");
+			}
+			url =ur;
+		}
+		
 		this.url = url;
 	}
 	
@@ -257,6 +274,7 @@ public class Page{
 	 * 传入当前页面的完整url（会自动过滤掉当前第几页的参数，以方便生成上一页、下一页等等链接）
 	 * <br/>若是bs应用，可直接使用 {@link #setUrl(HttpServletRequest)} 传入request，会全自动生成
 	 * @param url 生成的首页、上一页等链接地址的URL前缀，如 http://aaa.xnx3.com/index.php?id=3&pageCurrent=5&status=4
+	 * @deprecated 请使用 {@link #setUrl(String)}
 	 */
 	public void setUrlByStringUrl(String url) {
 		String ur = null;
