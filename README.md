@@ -6,6 +6,7 @@ java分页工具，8KB大小，无三方依赖。
 #### 1. pom.xml 引入 
 
 ````
+<!-- Page 分页 https://gitee.com/mail_osc/page.java -->
 <dependency>
 	<groupId>cn.zvo.page</groupId>
 	<artifactId>page</artifactId>

@@ -71,6 +71,15 @@ public class Page{
 	}
 	
 	/**
+	 * 共多少条数据
+	 * <p>例子：比如总共100条数据，每页显示10条，这里的总条数100便是通过这里设置的</p>
+	 * @param allRecordNumber 多少条，传入如 100
+	 */
+	public void setAllRecordNumber(int allRecordNumber) {
+		this.allRecordNumber = allRecordNumber;
+	}
+
+	/**
 	 * 传入当前页面的完整url（会自动过滤掉当前第几页的参数，以方便生成上一页、下一页等等链接）
 	 * @param scheme 协议，传入如 http、https 
 	 * @param host 主机，域名，传入如 www.zvo.cn 、 127.0.0.1 等格式
@@ -104,6 +113,27 @@ public class Page{
 		nextList = new ArrayList<TagA>();
 		this.allRecordNumber = allRecordNumber;
 		this.everyNumber = everyNumber;
+	}
+	
+	/**
+	 * 设置每页显示多少条
+	 * @param everyNumber
+	 */
+	public void setEveryNumber(int everyNumber) {
+		this.everyNumber = everyNumber;
+	}
+
+	/**
+	 * 需要配合以下几个才能使用，下面这三个是必须要设置的
+	 * <ul>
+	 * 		<li> {@link #setAllRecordNumber(int)} 设置共有多少条数据 </li>		
+	 * 		<li> {@link #setEveryNumber(int)} 设置每页多少条 </li>		
+	 * 		<li> {@link #setCurrentPageNumber(int)} 设置当前处于分页的第几页 </li>
+	 * </ul>
+	 */
+	public Page() {
+		upList = new ArrayList<TagA>();
+		nextList = new ArrayList<TagA>();
 	}
 	
 	/**
