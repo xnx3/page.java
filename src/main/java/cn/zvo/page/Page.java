@@ -96,12 +96,44 @@ public class Page{
 	}
 	
 	/**
+	 * 传入当前列表页面的完整url（会自动过滤掉当前第几页的参数，以方便生成上一页、下一页等等链接）
+	 * @param url 可以直接传入当前页面的url，图省事的话可以直接传入 request.getRequestURL() 即可。
+	 * 	<p>传入格式分两种:
+	 * 		<ul>
+	 * 			<li>带协议的整个url，如 http://www.zvo.cn/admin/user/list.jsp?name=管雷鸣&age=23&currentPage=4</li>
+	 * 			<li>不带协议跟域名的，如 /admin/user/list.jsp?name=管雷鸣&age=23&currentPage=4</li>
+	 * 		</ul>
+	 * 	</p>
+	 */
+	public void setUrl(String url) {
+		if(url == null) {
+			return;
+		}
+		
+		url = url.trim();
+		if(url.indexOf("http://") == 0 || url.indexOf("https://") == 0) {
+			//带有协议的，将协议去掉，如 https://conference.cioe.cn/skin/gaofeng/css/reset.css?version=2018/6/1%2020:20:49
+			int xieyiIndex = url.indexOf("://");
+			
+			//去掉协议的，如 conference.cioe.cn/skin/gaofeng/css/reset.css?version=2018/6/1%2020:20:49
+			String quxieyiUrl = url.substring(xieyiIndex+3, url.length());
+			
+			//去掉域名的，如 /skin/gaofeng/css/reset.css?version=2018/6/1%2020:20:49
+			int firstXiexian = quxieyiUrl.indexOf("/");
+			url = quxieyiUrl.substring(firstXiexian, quxieyiUrl.length());
+		}
+		
+		this.url = url;
+	}
+	
+	/**
 	 * 传入当前页面的完整url（会自动过滤掉当前第几页的参数，以方便生成上一页、下一页等等链接）
 	 * @param scheme 协议，传入如 http、https 
 	 * @param host 主机，域名，传入如 www.zvo.cn 、 127.0.0.1 等格式
 	 * @param port 端口号，传入如 80
 	 * @param path 请求路径，传入如 /admin/list.jsp
 	 * @param query get带的参数，传入格式如 a=1&b=2&c=3
+	 * @deprecated 请使用 {@link #set(String)}
 	 */
 	private void setUrl(String scheme, String host, int port, String path, String query) {
 		String url = scheme+"://" + host; //服务器地址
@@ -150,7 +182,7 @@ public class Page{
 	 * @return
 	 */
 	public String getLastPage() {
-		this.lastPage=generateUrl(this.lastPageNumber);	//生成尾页url
+		this.lastPage=generateUrl(getLastPageNumber());	//生成尾页url
 		return this.lastPage;
 	}
 
@@ -169,10 +201,10 @@ public class Page{
 	 */
 	public int getNextPageNumber() {
 		//生成下一页的URL
-		if(this.currentPageNumber < this.lastPageNumber){
+		if(this.currentPageNumber < getLastPageNumber()){
 			this.nextPageNumber = this.currentPageNumber + 1;
 		}else{
-			this.nextPageNumber = this.lastPageNumber;
+			this.nextPageNumber = getLastPageNumber();
 		}
 		return nextPageNumber;
 	}
@@ -183,7 +215,7 @@ public class Page{
 	 */
 	public String getNextPage(){
 		//生成下一页的URL
-		this.nextPage=generateUrl(this.nextPageNumber);
+		this.nextPage=generateUrl(getNextPageNumber());
 		return this.nextPage;
 	}
 	
@@ -192,7 +224,7 @@ public class Page{
 	 * @return true:有下一页
 	 */
 	public boolean isHaveNextPage(){
-		this.haveNextPage = this.getNextPageNumber() > this.currentPageNumber; 
+		this.haveNextPage = getNextPageNumber() > this.currentPageNumber; 
 		return this.haveNextPage;
 	}
 
@@ -215,7 +247,7 @@ public class Page{
 	 * @return true:有上一页
 	 */
 	public boolean isHaveUpPage(){
-		this.haveUpPage = this.getUpPageNumber() > 1; 
+		this.haveUpPage = getUpPageNumber() > 1; 
 		return this.haveNextPage;
 	}
 	
@@ -224,7 +256,7 @@ public class Page{
 	 * @return
 	 */
 	public String getUpPage(){
-		this.upPage = generateUrl(this.getUpPageNumber());
+		this.upPage = generateUrl(getUpPageNumber());
 		return this.upPage;
 	}
 	
@@ -270,6 +302,7 @@ public class Page{
 			url =ur;
 		}
 		this.url = url;
+		
 	}
 	
 	
@@ -306,9 +339,6 @@ public class Page{
 		if(this.currentPageNumber < 1){
 			this.currentPageNumber = 1;
 		}
-//		
-//		this.currentFirstPage = currentPageNumber == 1;		//当前页是否是第一页
-//		this.currentLastPage = currentPageNumber == this.lastPageNumber;		//当前页是否是最后一页
 	}
 	
 	/**
