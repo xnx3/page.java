@@ -18,26 +18,26 @@ public class Page{
 	 * 默认向上列出3页跳转、向下列出3页跳转
 	 * {@link #getUpList()} {@link #getNextList()}会用到
 	 */
-	public int listNumber = 3;
+	private int listNumber = 3;
 	
-	public int limitStart;	//limit 的开始
-	public String url;	//当前列表网址，后跟随除CURRENTPAGENAME外的其他所有参数
-	public int allRecordNumber;	//总条数
-	public int currentPageNumber;	//当前页面，当前第几页
-	public int everyNumber;	//每页显示多少条
-	public int lastPageNumber;	//最后一页是编号为几的页数
-	public String nextPage;	//下一页URL
-	public String upPage;		//上一页URL
-	public String lastPage;	//尾页URL
-	public String firstPage;	//首页，第一页URL
-	public boolean haveNextPage;	//是否还有下一页
-	public boolean haveUpPage;		//是否还有上一页
-	public boolean currentLastPage;	//当前是否是最后一页
-	public boolean currentFirstPage;	//当前是否是首页，第一页
-	public int upPageNumber;	//上一页的页码
-	public int nextPageNumber;	//下一页的页码
-	public List<TagA> upList;	//向上的list分页标签
-	public List<TagA> nextList;	//向下的分页list标签
+	private int limitStart;	//limit 的开始
+	private String url;	//当前列表网址，后跟随除CURRENTPAGENAME外的其他所有参数
+	private int allRecordNumber;	//总条数
+	private int currentPageNumber;	//当前页面，当前第几页
+	private int everyNumber;	//每页显示多少条
+	private int lastPageNumber;	//最后一页是编号为几的页数
+	private String nextPage;	//下一页URL
+	private String upPage;		//上一页URL
+	private String lastPage;	//尾页URL
+	private String firstPage;	//首页，第一页URL
+	private boolean haveNextPage;	//是否还有下一页
+	private boolean haveUpPage;		//是否还有上一页
+	private boolean currentLastPage;	//当前是否是最后一页
+	private boolean currentFirstPage;	//当前是否是首页，第一页
+	private int upPageNumber;	//上一页的页码
+	private int nextPageNumber;	//下一页的页码
+	private List<TagA> upList;	//向上的list分页标签
+	private List<TagA> nextList;	//向下的分页list标签
 	
 	/**
 	 * 传入当前列表页面的完整url（会自动过滤掉当前第几页的参数，以方便生成上一页、下一页等等链接）
