@@ -300,7 +300,7 @@ public class Page{
 	
 	/**
 	 * 获取limit查询开始的数字
-	 * @return
+	 * @return 比如第一页，那么这里就会返回 0
 	 */
 	public int getLimitStart() {
 		this.limitStart = (this.currentPageNumber-1)*this.everyNumber;	//开始的limit
